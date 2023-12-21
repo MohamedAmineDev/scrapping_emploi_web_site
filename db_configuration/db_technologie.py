@@ -91,3 +91,16 @@ class DbTechnology:
             return technology
         except mysql.connector.Error:
             print(f'Could not fetch technology {technology_id} !')
+
+    def select_one_technology_by_name(self, technology_name):
+        try:
+            request = f'SELECT * FROM {self._table_name} WHERE name = %s ORDER BY id'
+            self._db_connection.get_connection()
+            cursor = self._db_connection.create_cursor()
+            cursor.execute(request, (technology_name,))
+            row = cursor.fetchone()
+            technology = Technology(row[0], row[1])
+            self._db_connection.close_connection()
+            return technology
+        except mysql.connector.Error:
+            print(f'Could not fetch technology {technology_name} !')

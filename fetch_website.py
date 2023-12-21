@@ -1,13 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
 from fetch_job import grab_single_job
+from db_configuration.db_job import DbJob
 
 
-def fetch_website(technology):
+def fetch_website(technology, db_connection):
     print('-------------------------------')
     print(f'Begin the task')
     print('-------------------------------')
-    link=f'https://candidat.pole-emploi.fr/offres/recherche?lieux=75D&motsCles={technology.name}&offresPartenaires=true&rayon=10&tri=0'
+    link = f'https://candidat.pole-emploi.fr/offres/recherche?lieux=75D&motsCles={technology.name}&offresPartenaires=true&rayon=10&tri=0'
     print(f'Counting offers of {technology.name} from this link {link}')
     html_text = requests.get(link).text
     soup = BeautifulSoup(html_text, 'lxml')
@@ -24,10 +25,17 @@ def fetch_website(technology):
         print(f'.', end='')
         jobs.append(grab_single_job(f'https://candidat.pole-emploi.fr/offres/recherche/detail/{target}', technology))
     print('')
-    i=0
+    i = 0
     print('Saving new offers')
     for job in jobs:
-        print('Do this')
+        db_job = DbJob(db_connection)
+        job_found = db_job.select_one_job_by_unique_id(job.unique_id)
+        if job_found is None:
+            new_job = job
+            new_job.technology = technology
+            db_job.insert_offer(new_job)
+            i=i+1
+
     print(f'{i} offre were added !')
     print('-------------------------------')
     print('End of the task')

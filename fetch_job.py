@@ -37,7 +37,7 @@ def grab_single_job(link, technology):
             #    data_titles.pop(i)
 
             i = i + 1
-    job.id = fetch_id_offer(soup)
+    job._unique_id = fetch_id_offer(soup)
     job.enterprise_name = fetch_title(soup)
     job.date = fetch_date(soup)
     job.address = fetch_address(soup)
