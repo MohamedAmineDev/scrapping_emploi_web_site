@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+     MYSQL_ROOT_PASSWORD: secret
+     MYSQL_DATABASE: jobs_db
+     MYSQL_USER: user_scrapper_2
+     MYSQL_PASSWORD: 123456789
+    ports:
+      - "3306:3306"
+  python-app:
+    image: scrapper1
+    depends_on: mysql
+    restart: always
+    environment:
+      - DB_HOST=mysql
+      - DB_DATABASE=jobs_db
+      - DB_USER=user_scrapper_2
+      - DB_PASSWORD=123456789
+    command: python main.py
