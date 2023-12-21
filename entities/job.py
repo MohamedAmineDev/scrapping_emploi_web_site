@@ -2,10 +2,12 @@ from entities.technology import Technology
 
 
 class Job:
-    def __init__(self, id=None, enterprise_name=None, skills=None, languages=None, name=None, date=None, address=None,
+    def __init__(self, id=None, unique_id=None, enterprise_name=None, skills=None, languages=None, name=None, date=None,
+                 address=None,
                  contract_type=None, qualification=None, technology=None):
-        if id is not None and enterprise_name is not None and skills is not None and languages is not None and name is not None and date is not None and address is not None and contract_type is not None and qualification is not None and technology is not None:
+        if id is not None and unique_id is not None and enterprise_name is not None and skills is not None and languages is not None and name is not None and date is not None and address is not None and contract_type is not None and qualification is not None and technology is not None:
             self._id = id
+            self._unique_id = unique_id
             self._experience = enterprise_name
             self._skills = skills
             self._languages = languages
@@ -17,6 +19,7 @@ class Job:
             self._technology = technology
         else:
             self._id = ''
+            self._unique_id = ''
             self._experience = ''
             self._skills = ''
             self._languages = ''
@@ -34,6 +37,14 @@ class Job:
     @id.setter
     def id(self, value):
         self._id = value
+
+    @property
+    def unique_id(self):
+        return self._unique_id
+
+    @unique_id.setter
+    def unique_id(self, value):
+        self._unique_id = value
 
     @property
     def experience(self):
