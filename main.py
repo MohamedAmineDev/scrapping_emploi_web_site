@@ -63,7 +63,7 @@ def main():
         db_technology.insert_technology(Technology(1, 'selenium'))
         db_technology.insert_technology(Technology(1, 'jira'))
         technologies = db_technology.select_technology()
-    sleeping_time = 5
+    sleeping_time = 10
     while True:
         for technology in technologies:
             fetch_website(technology, db_connection)

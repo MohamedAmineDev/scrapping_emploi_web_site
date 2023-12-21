@@ -1,15 +1,16 @@
 import mysql.connector
 import xml.etree.ElementTree as ET
+import os
 
 
 class DbConnection:
     def __init__(self):
         tree = ET.parse('db_configuration.xml')
         root = tree.getroot()
-        self._host = root.find('host').text
-        self._database = root.find('database').text
-        self._user = root.find('user').text
-        self._password = root.find('password').text
+        self._host = os.getenv('DB_HOST', f'{root.find('host').text}')
+        self._database = os.getenv('DB_DATABASE', f'{root.find('database').text}')
+        self._user = os.getenv('DB_USER', f'{root.find('user').text}')
+        self._password = os.getenv('DB_PASSWORD', f'{root.find('password').text}')
         self._connection = None
 
     @property
