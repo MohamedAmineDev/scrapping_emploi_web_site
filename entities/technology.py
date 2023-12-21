@@ -24,4 +24,4 @@ class Technology:
         self._name = value
 
     def __str__(self):
-        return f"technology(id={self.id},name={self.name})\n"
+        return f"Technology(id={self.id},name={self.name})\n"

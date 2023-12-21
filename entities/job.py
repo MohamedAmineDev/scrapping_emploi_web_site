@@ -1,15 +1,15 @@
 from entities.technology import Technology
 
 
-class Offer:
-    def __init__(self, id=None, experience=None, skills=None, languages=None, name=None, date=None, address=None,
+class Job:
+    def __init__(self, id=None, enterprise_name=None, skills=None, languages=None, name=None, date=None, address=None,
                  contract_type=None, qualification=None, technology=None):
-        if id is not None and experience is not None and skills is not None and languages is not None and name is not None and date is not None and address is not None and contract_type is not None and qualification is not None and technology is not None:
+        if id is not None and enterprise_name is not None and skills is not None and languages is not None and name is not None and date is not None and address is not None and contract_type is not None and qualification is not None and technology is not None:
             self._id = id
-            self._experience = experience
+            self._experience = enterprise_name
             self._skills = skills
             self._languages = languages
-            self._name = name
+            self._enterprise_name = name
             self._date = date
             self._address = address
             self._contract_type = contract_type
@@ -20,7 +20,7 @@ class Offer:
             self._experience = ''
             self._skills = ''
             self._languages = ''
-            self._name = ''
+            self._enterprise_name = ''
             self._date = ''
             self._address = ''
             self._contract_type = ''
@@ -60,12 +60,12 @@ class Offer:
         self._languages = value
 
     @property
-    def name(self):
-        return self._name
+    def enterprise_name(self):
+        return self._enterprise_name
 
-    @name.setter
-    def name(self, value):
-        self._name = value
+    @enterprise_name.setter
+    def enterprise_name(self, value):
+        self._enterprise_name = value
 
     @property
     def date(self):
@@ -108,4 +108,4 @@ class Offer:
         self._technology = value
 
     def __str__(self):
-        return f"offer(id={self.id},technology_id={self.technology.id},entreprise_name={self.name},skills=[{self.skills}],date={self.date},address={self.address},contract_type={self.contract_type},qualification={self.qualification},experience={self.experience},language={self.languages}\n"
+        return f"Job(id={self.id},technology_id={self.technology.id},enterprise_name={self.enterprise_name},skills=[{self.skills}],date={self.date},address={self.address},contract_type={self.contract_type},qualification={self.qualification},experience={self.experience},language={self.languages}\n"
