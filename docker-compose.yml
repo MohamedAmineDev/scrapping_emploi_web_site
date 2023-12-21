@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 services:
   mysql:
     image: mysql:5.7
@@ -9,7 +9,9 @@ services:
      MYSQL_USER: user_scrapper_2
      MYSQL_PASSWORD: 123456789
     ports:
-      - "3306:3306"
+      - 0.0.0.0:3306:3306
+    volumes:
+      - jobs_db:/var/lib/mysql
   python-app:
     image: scrapper1
     depends_on: mysql
@@ -20,3 +22,5 @@ services:
       - DB_USER=user_scrapper_2
       - DB_PASSWORD=123456789
     command: python main.py
+volumes:
+  jobs_db:
