@@ -1,8 +1,6 @@
 pipeline{
   agent any
-  tools{
-    python 'python'
-  }
+
   stages{
     stage("Clean un"){
       steps{
